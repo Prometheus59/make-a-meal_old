@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Main() {
+export default function Home() {
 
     const [ingredients, setIngredients] = useState(["Lemons", "Sugar", "Water"]);
     const [value, setValue] = useState("");
@@ -21,7 +21,8 @@ export default function Main() {
                     <li key={index}>{ingredient}</li>
                 ))}
             </ul>
-
+            
+            {/* TODO: Have this link to the recipe page */}
             <button>Generate Recipes</button>
         </div>
     )
