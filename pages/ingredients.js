@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link'
+import nextStyles from '../styles/Home.module.css'
+import styles from "../styles/Ingredient.module.css"
 
-export default function Home() {
+
+export default function Ingredients() {
 
     const [ingredients, setIngredients] = useState(["Lemons", "Sugar", "Water"]);
     const [value, setValue] = useState("");
@@ -11,7 +15,7 @@ export default function Home() {
     }
 
     return (
-        <div>
+        <div className={styles.ingredient}>
             <h1>Add your ingredients</h1>
             <input type="text" placeholder="Ingredient" value={value} onChange={e => setValue(e.target.value)} />
             <button onClick={() => addIngredient(value)}>Add</button>
@@ -21,9 +25,12 @@ export default function Home() {
                     <li key={index}>{ingredient}</li>
                 ))}
             </ul>
-            
-            {/* TODO: Have this link to the recipe page */}
-            <button>Generate Recipes</button>
+
+            <div className={nextStyles.card}>
+                <Link href="/recipes">
+                    <a>Generate Recipes</a>
+                </Link>
+            </div>
         </div>
     )
 }

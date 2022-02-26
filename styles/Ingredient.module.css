@@ -1,0 +1,7 @@
+.ingredient {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 80%;
+    margin: auto;
+}

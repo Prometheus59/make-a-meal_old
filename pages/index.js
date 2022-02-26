@@ -25,10 +25,9 @@ export default function Home() {
 
 
         <div className={styles.grid}>
-
           <div className={styles.card}>
-            <Link href="/home">
-              <a>Home</a>
+            <Link href="/ingredients">
+              <a>Ingredients</a>
             </Link>
           </div>
 
