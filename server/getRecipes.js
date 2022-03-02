@@ -1,41 +1,38 @@
-const nodeFetch = require("node-fetch");
+const axios = require("axios");
 
-//   TODO: - Scrape web for recipes with listed ingredients
+const APP_ID = "a97b643c";
+const APP_KEY = "0db0cebe43e807c65d019bcab85d8984";
+
+const req_url = `https://api.edamam.com/api/recipes/v2?type=public&q=lemon&app_id=${APP_ID}&app_key=${APP_KEY}`;
+
+//   TODO: - Use the edamam API to get the recipes
 //         - Filter recipes by ingredients listed
 //         - Return recipes (Ranked by most ingredients matched) -> Just return url for now
 
-class fetchData {
-    constructor(count, url) {
-        // Make count between 1 & 10
-        this.count = count < 1 || count > 10 ? 5 : count;
-        this.url = url;
-        this.result = [];
-    }
-
-    // Get popular posts, return results in array
-    // First element is title, remainder are posts
-    async default(count) {
-        try {
-            let posts = [];
-            const response = await nodeFetch(this.url);
-            const json = await response.json();
-            posts.push(title);
-
-            for (let x = 0; x < count; x++) {
-                // Will need to change this
-                posts.push(json.data.children[x].data.title + "\n");
-            }
-            return posts;
-        } catch (error) {
-            console.log(error);
-        }
-    }
-}
-
 const queryRecipes = async () => {
-    console.log(`Collecting Data...`);
+  let recipes = [];
+  console.log(`Collecting Data...`);
 
-    let recipes = await fetchData("https://www.google.com/search?q=recipes+garlic+lemon+water&oq=recipes+garlic+lemon+water");
+  axios
+    .get(req_url)
+    .then((res) => {
+      console.log(`Data Collected!`);
+    })
+    .then((res) => {
+      console.log(`Parsing Data...`);
+      for (let i = 0; i < res.data.hits.length; i++) {
+        recipes.push(res.data.hits[i].recipe);
+      }
+      console.log(`Data Parsed!`);
+    })
+    .then((res) => {
+      for (let i = 0; i < recipes.length; i++) {
+        console.log(recipes[i].label);
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-    
-}
+queryRecipes();
